@@ -66,14 +66,16 @@ void Node::printNodeError(std::string text){
     std::cerr << "Error in node with id: " << id << std::endl << text << std::endl;
 }
 
+bool ENTRY::canResolve(){
+    return _state!=State::UNSET;
+}
+
 void ENTRY::tryResolve(){
     if(canResolve()){
-        if(_state==State::UNSET){
-            printNodeError("Entry node has unset state");
-        }
-        else{
-            setNextNodesInput();
-        }
+        setNextNodesInput();
+    }
+    else{
+        printNodeError("Entry node has unset state");
     }
 }
 

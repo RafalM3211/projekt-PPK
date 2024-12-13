@@ -43,6 +43,8 @@ class Node{
 };
 
 class ENTRY: public Node{
+    private:
+        bool canResolve();
     public:
         using Node::Node;
         void tryResolve();
