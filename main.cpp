@@ -12,8 +12,8 @@ int main(){
     ENTRY* input2 = new ENTRY(2, State::HIGH, {3});
 
     AND* node3 = new AND(3, {});
-    logicSystem.addInputNode(input1);
-    logicSystem.addInputNode(input2);
+    logicSystem.addEntryNode(input1);
+    logicSystem.addEntryNode(input2);
     logicSystem.addNode(node3);
 
     logicSystem.printConnections();

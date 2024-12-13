@@ -20,7 +20,7 @@ class LogicSystem{
     public:
         void printConnections();
         void addNode(Node*);
-        void addInputNode(Node*);
+        void addEntryNode(Node*);
 };
 
 class Node{

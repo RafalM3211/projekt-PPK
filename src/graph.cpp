@@ -16,7 +16,7 @@ void LogicSystem::addNode(Node* node){
     _graph[node->id]=node;   
 }
 
-void LogicSystem::addInputNode(Node* node){
+void LogicSystem::addEntryNode(Node* node){
     addNode(node);
     _startNodes.push_back(node->id);
 }
