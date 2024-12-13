@@ -1,0 +1,6 @@
+- Każdy węzeł (bramka) jest obiektem z klasy dziedziczącej z głównej klasy Node.
+- Podział na podklasy w zależności od typu bramki - AND, OR itd.. oraz dodatkowe klasy dla węzłów wejściowych i wyjściowego.
+
+- Mapa węzłów z id węzłów jako kluczami. Może jako pole wyższej klasy, która będzie rodzicem dla klasy Node.
+- Węzeł przechowuje listę id następnych węzłów (Do węzłów dla których jest wejściem)
+- 
