@@ -29,6 +29,7 @@ class Node{
         State _inputs[2]={State::UNSET, State::UNSET};
         State _state=State::UNSET;
         bool canResolve();
+        void printNodeError(std::string);
     public:
         int id;
         std::vector<int> outputNodes;
@@ -41,11 +42,11 @@ class Node{
         : id(nodeId), _state(outState), outputNodes(outNodes) {};
 };
 
-class INPUT: public Node{
+class ENTRY: public Node{
     public:
         using Node::Node;
         void tryResolve();
-}
+};
 
 class AND: public Node {
     public:

@@ -33,7 +33,7 @@ void Node::setNodeInput(State state){
         _inputs[1]=state;
     }
     else{
-        std::cerr << "all two inputs already set. Node id: " << id;
+        printNodeError("all two inputs already set");
     }
 }
 
@@ -46,7 +46,7 @@ void Node::setNextNodesInput(){
         }
     }
     else{
-        std::cerr << "attemt to set next node input without resolving current node. Node id: " << id << std::endl; 
+        printNodeError("attemt to set next node input without resolving current node.");
     }
 }
 
@@ -62,7 +62,20 @@ bool Node::canResolve(){
     return _inputs[0]!=State::UNSET && _inputs[1]!=State::UNSET;
 }
 
+void Node::printNodeError(std::string text){
+    std::cerr << "Error in node with id: " << id << std::endl << text << std::endl;
+}
 
+void ENTRY::tryResolve(){
+    if(canResolve()){
+        if(_state==State::UNSET){
+            printNodeError("Entry node has unset state");
+        }
+        else{
+            setNextNodesInput();
+        }
+    }
+}
 
 void AND::tryResolve(){
     if(canResolve()){

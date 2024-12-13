@@ -8,8 +8,8 @@
 int main(){
     LogicSystem logicSystem;
 
-    INPUT* input1 = new INPUT(1, State::LOW, {3});
-    INPUT* input2 = new INPUT(2, State::HIGH, {3});
+    ENTRY* input1 = new ENTRY(1, State::LOW, {3});
+    ENTRY* input2 = new ENTRY(2, State::HIGH, {3});
 
     AND* node3 = new AND(3, {});
     logicSystem.addInputNode(input1);
