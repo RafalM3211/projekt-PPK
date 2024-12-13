@@ -1,10 +1,7 @@
 #include "./headers/graph.h"
 
-LogicSystem::LogicSystem(){
-}
-
 void LogicSystem::printConnections(){
-    for(auto & pair:_graph){
+    for(auto& pair:_graph){
         std::cout<< "from " << pair.first << ": ";
         for(auto & nextId:pair.second->outputNodes){
             std::cout << nextId << " ";
@@ -28,7 +25,7 @@ void Node::connectToSystemGraph(Graph* graph){
     _graph=graph;
 }
 
-void Node::setInput(State state){
+void Node::setNodeInput(State state){
     if(_inputs[0]==State::UNSET){
         _inputs[0]=state;
     }
@@ -45,7 +42,7 @@ void Node::setNextNodesInput(){
     if(_state!=State::UNSET){
         for(const int & nextNodeId: outputNodes){
             Node* nextNode = _graph->at(nextNodeId);
-            nextNode->setInput(_state);
+            nextNode->setNodeInput(_state);
         }
     }
     else{
@@ -56,16 +53,21 @@ void Node::setNextNodesInput(){
 void Node::printInfo(){
     std::cout<< "id: " << id << "\n inputs: " << _inputs[0] << " " << _inputs[1] << "\n state: " << _state << "\n output nodes: ";
     for(const int & nextNodeId: outputNodes){
-            std::cout << nextNodeId << std::endl;
+            std::cout << nextNodeId << ", ";
     }
+    std::cout << std::endl;
 }
 
-void Node::canResolve(){
+bool Node::canResolve(){
     return _inputs[0]!=State::UNSET && _inputs[1]!=State::UNSET;
 }
 
+
+
 void AND::tryResolve(){
     if(canResolve()){
-        
+        _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
+
+        setNextNodesInput();
     }
 }

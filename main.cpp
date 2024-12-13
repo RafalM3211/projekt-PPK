@@ -4,23 +4,22 @@
 
 #include "./src/headers/graph.h"
 
-Node* createInputNode(int id, State state){
-    return new Node(id, state, {3});
-}
-
 
 int main(){
     LogicSystem logicSystem;
 
-    Node* input1 = createInputNode(1, State::LOW);
-    Node* input2 = createInputNode(2, State::HIGH);
-    Node* node3 = new Node{3, {0}};
+    INPUT* input1 = new INPUT(1, State::LOW, {3});
+    INPUT* input2 = new INPUT(2, State::HIGH, {3});
+
+    AND* node3 = new AND(3, {});
     logicSystem.addInputNode(input1);
     logicSystem.addInputNode(input2);
     logicSystem.addNode(node3);
 
     logicSystem.printConnections();
 
+    node3->printInfo();
+    node3->tryResolve();
     node3->printInfo();
     
 
