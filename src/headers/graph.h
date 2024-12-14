@@ -28,15 +28,19 @@ class Node{
         Graph* _graph=nullptr;
         State _inputs[2]={State::UNSET, State::UNSET};
         State _state=State::UNSET;
-        bool canResolve();
+
+        void setNextNodesInput();
         void printNodeError(std::string);
+        void tryResolveNextNodes();
+        virtual void computeState(){};
     public:
+        virtual bool canResolve();
         int id;
         std::vector<int> outputNodes;
         void setNodeInput(State);
-        void setNextNodesInput();
         void connectToSystemGraph(Graph*);
         void printInfo();
+        void tryResolve();
         Node(int nodeId, std::vector<int> outNodes){id=nodeId, outNodes=outNodes;};
         Node(int nodeId, State outState, std::vector<int> outNodes={})
         : id(nodeId), _state(outState), outputNodes(outNodes) {};
@@ -44,20 +48,19 @@ class Node{
 
 class ENTRY: public Node{
     private:
-        bool canResolve();
     public:
         using Node::Node;
-        void tryResolve();
+        bool canResolve() override;
 };
 
 class AND: public Node {
     public:
         using Node::Node;
-        void tryResolve();
+        void computeState() override;
 };
 
 class OR: public Node {
     public:
         using Node::Node;
-        void tryResolve();
+        void computeState() override{};
 };

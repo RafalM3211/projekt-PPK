@@ -38,9 +38,8 @@ void Node::setNodeInput(State state){
 }
 
 void Node::setNextNodesInput(){
-    //    Node* a =  _graph->at(1);
     if(_state!=State::UNSET){
-        for(const int & nextNodeId: outputNodes){
+        for(const int& nextNodeId: outputNodes){
             Node* nextNode = _graph->at(nextNodeId);
             nextNode->setNodeInput(_state);
         }
@@ -52,37 +51,44 @@ void Node::setNextNodesInput(){
 
 void Node::printInfo(){
     std::cout<< "id: " << id << "\n inputs: " << _inputs[0] << " " << _inputs[1] << "\n state: " << _state << "\n output nodes: ";
-    for(const int & nextNodeId: outputNodes){
+    for(const int& nextNodeId: outputNodes){
             std::cout << nextNodeId << ", ";
     }
     std::cout << std::endl;
-}
-
-bool Node::canResolve(){
-    return _inputs[0]!=State::UNSET && _inputs[1]!=State::UNSET;
 }
 
 void Node::printNodeError(std::string text){
     std::cerr << "Error in node with id: " << id << std::endl << text << std::endl;
 }
 
+
+bool Node::canResolve(){
+    return _inputs[0]!=State::UNSET && _inputs[1]!=State::UNSET;
+}
+
+void Node::tryResolveNextNodes(){
+    for(const int& nextNodeId: outputNodes){
+            Node* nextNode = _graph->at(nextNodeId);
+            nextNode->tryResolve();
+        }
+}
+
+void Node::tryResolve(){
+    if(canResolve()){
+        computeState();
+        setNextNodesInput();
+        tryResolveNextNodes();
+    }
+}
+
+
 bool ENTRY::canResolve(){
+    if(_state==State::UNSET){
+        printNodeError("Entry node has unset state. It should have state set durning initialization");
+    }
     return _state!=State::UNSET;
 }
 
-void ENTRY::tryResolve(){
-    if(canResolve()){
-        setNextNodesInput();
-    }
-    else{
-        printNodeError("Entry node has unset state");
-    }
-}
-
-void AND::tryResolve(){
-    if(canResolve()){
-        _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
-
-        setNextNodesInput();
-    }
+void AND::computeState(){
+    _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
 }

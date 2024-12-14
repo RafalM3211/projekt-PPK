@@ -19,10 +19,9 @@ int main(){
     logicSystem.printConnections();
 
     input1->tryResolve();
+    node3->printInfo();
     input2->tryResolve();
 
-    node3->printInfo();
-    node3->tryResolve();
     node3->printInfo();
     
 
