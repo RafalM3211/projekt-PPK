@@ -10,45 +10,54 @@ class ENTRY: public Node{
 };
 
 class AND: public Node {
+    private:
+        void computeState() override;
     public:
         using Node::Node;
-        void computeState() override;
 };
 
 class NAND: public Node {
+    private:
+        void computeState() override;
     public:
         using Node::Node;
-        void computeState() override;
 };
 
 class OR: public Node {
+    private:
+        void computeState() override;
     public:
         using Node::Node;
-        void computeState() override;
 };
 
 class NOR: public Node {
+    private:
+        void computeState() override;
     public:
         using Node::Node;
-        void computeState() override;
 };
 
 class XOR: public Node {
+    private:
+        void computeState() override;
     public:
         using Node::Node;
-        void computeState() override;
 };
 
 class XNOR: public Node {
+    private:
+        void computeState() override;
     public:
         using Node::Node;
-        void computeState() override;
 };
 
-class NEG: public Node {
+class NOT: public Node {
+    private:
+        void computeState() override;
+        bool canResolve() override;
+        void setNodeInput(State state) override;
     public:
         using Node::Node;
-        void computeState() override;
 };
 
 

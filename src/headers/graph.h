@@ -36,16 +36,18 @@ class Node{
         void printNodeError(std::string);
         void tryResolveNextNodes();
         virtual void computeState(){};
-    public:
         virtual bool canResolve();
-        int id;
+    public:
+        const int id;
         std::vector<int> outputNodes;
-        void setNodeInput(State);
+
+        virtual void setNodeInput(State);
         void connectToSystemGraph(Graph*);
         void printInfo();
         void tryResolve();
-        Node(int nodeId, std::vector<int> outNodes){id=nodeId, outNodes=outNodes;};
-        Node(int nodeId, State outState, std::vector<int> outNodes={})
+
+        Node(int nodeId, std::vector<int> outNodes): id(nodeId), outputNodes(outNodes) {};
+        Node(int nodeId, State outState, std::vector<int> outNodes)
         : id(nodeId), _state(outState), outputNodes(outNodes) {};
 };
 
