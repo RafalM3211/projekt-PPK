@@ -9,6 +9,7 @@
                 "-g",
                 "main.cpp",
                 "./src/graph.cpp",
+                "./src/logicGates.cpp",
                 "-o",
                 "${fileDirname}\\build\\${fileBasenameNoExtension}.exe"
             ],

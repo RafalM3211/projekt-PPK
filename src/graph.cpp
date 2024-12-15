@@ -50,7 +50,7 @@ void Node::setNextNodesInput(){
 }
 
 void Node::printInfo(){
-    std::cout<< "id: " << id << "\n inputs: " << _inputs[0] << " " << _inputs[1] << "\n state: " << _state << "\n output nodes: ";
+    std::cout<< "id: " << id << "\n inputs states: " << _inputs[0] << " " << _inputs[1] << "\n state: " << _state << "\n output nodes: ";
     for(const int& nextNodeId: outputNodes){
             std::cout << nextNodeId << ", ";
     }
@@ -79,16 +79,4 @@ void Node::tryResolve(){
         setNextNodesInput();
         tryResolveNextNodes();
     }
-}
-
-
-bool ENTRY::canResolve(){
-    if(_state==State::UNSET){
-        printNodeError("Entry node has unset state. It should have state set durning initialization");
-    }
-    return _state!=State::UNSET;
-}
-
-void AND::computeState(){
-    _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
 }

@@ -1,3 +1,6 @@
+#ifndef GRAPH
+#define GRAPH
+
 #include <iostream>
 #include <vector>
 #include <unordered_map>
@@ -46,21 +49,4 @@ class Node{
         : id(nodeId), _state(outState), outputNodes(outNodes) {};
 };
 
-class ENTRY: public Node{
-    private:
-    public:
-        using Node::Node;
-        bool canResolve() override;
-};
-
-class AND: public Node {
-    public:
-        using Node::Node;
-        void computeState() override;
-};
-
-class OR: public Node {
-    public:
-        using Node::Node;
-        void computeState() override{};
-};
+#endif
