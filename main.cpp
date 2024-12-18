@@ -27,6 +27,8 @@ int main(){
     logicSystem.addNode(node4);
     logicSystem.addNode(node5);
 
+    logicSystem.setOutputNodeId(node5->id);
+
     logicSystem.printConnections();
 
     input1->printInfo();
@@ -46,6 +48,7 @@ int main(){
     node4->printInfo();
     node5->printInfo();
     
+    logicSystem.printOutput();
 
     int a = static_cast<int>(State::LOW);
 

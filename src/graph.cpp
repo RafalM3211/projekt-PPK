@@ -1,5 +1,7 @@
 #include "./headers/graph.h"
 
+// === Logic system
+
 void LogicSystem::printConnections(){
     for(auto& pair:_graph){
         std::cout<< "from " << pair.first << ": ";
@@ -20,6 +22,17 @@ void LogicSystem::addEntryNode(Node* node){
     addNode(node);
     _startNodes.push_back(node->id);
 }
+
+void LogicSystem::setOutputNodeId(int id){
+    _outputNodeId=id;
+}
+
+void LogicSystem::printOutput(){
+    State output=_graph.at(_outputNodeId)->getState();
+    std::cout << "System output: " << output;
+}
+
+// === Node
 
 void Node::connectToSystemGraph(Graph* graph){
     _graph=graph;
@@ -79,4 +92,8 @@ void Node::tryResolve(){
         setNextNodesInput();
         tryResolveNextNodes();
     }
+}
+
+State Node::getState(){
+    return _state;
 }

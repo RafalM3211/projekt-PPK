@@ -20,10 +20,13 @@ class LogicSystem{
     private:
         Graph _graph;
         std::vector<int> _startNodes;
+        int _outputNodeId;
     public:
         void printConnections();
         void addNode(Node*);
         void addEntryNode(Node*);
+        void setOutputNodeId(int);
+        void printOutput();
 };
 
 class Node{
@@ -45,6 +48,7 @@ class Node{
         void connectToSystemGraph(Graph*);
         void printInfo();
         void tryResolve();
+        State getState();
 
         Node(int nodeId, std::vector<int> outNodes): id(nodeId), outputNodes(outNodes) {};
         Node(int nodeId, State outState, std::vector<int> outNodes)
