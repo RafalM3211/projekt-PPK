@@ -45,14 +45,15 @@ class Node{
         std::vector<int> outputNodes;
 
         virtual void setNodeInput(State);
+        void addOutputNode(int);
         void connectToSystemGraph(Graph*);
         void printInfo();
         void tryResolve();
         State getState();
 
-        Node(int nodeId, std::vector<int> outNodes): id(nodeId), outputNodes(outNodes) {};
-        Node(int nodeId, State outState, std::vector<int> outNodes)
-        : id(nodeId), _state(outState), outputNodes(outNodes) {};
+        Node(int nodeId): id(nodeId){};
+        Node(int nodeId, State outState)
+        : id(nodeId), _state(outState){};
 };
 
 #endif

@@ -50,6 +50,10 @@ void Node::setNodeInput(State state){
     }
 }
 
+void Node::addOutputNode(int id){
+    outputNodes.push_back(id);
+}
+
 void Node::setNextNodesInput(){
     if(_state!=State::UNSET){
         for(const int& nextNodeId: outputNodes){

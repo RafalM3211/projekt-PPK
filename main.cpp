@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <unordered_map>
+#include <string>
+#include <strstream>
 
 #include "./src/headers/graph.h"
 #include "./src/headers/logicGates.h"
@@ -25,15 +27,30 @@ int main(){
     else{
         LogicSystem logicSystem;
 
-        ENTRY* input1 = new ENTRY(1, State::HIGH, {4, 5, 6});
-        ENTRY* input2 = new ENTRY(2, State::HIGH, {4});
-        ENTRY* input3 = new ENTRY(3, State::LOW, {5, 6});
 
-        AND* node1 = new AND(4, {7});
-        OR* node2 = new OR(5, {7});
-        XOR* node3 = new XOR(6, {});
-        OR* node4 = new OR(7, {8});
-        NOT* node5 = new NOT(8, {});
+        ENTRY* input1 = new ENTRY(1, State::HIGH);
+        input1->addOutputNode(4);
+        input1->addOutputNode(5);
+        input1->addOutputNode(6);
+
+        ENTRY* input2 = new ENTRY(2, State::HIGH);
+        input2->addOutputNode(4);
+
+        ENTRY* input3 = new ENTRY(3, State::LOW);
+        input3->addOutputNode(5);
+        input3->addOutputNode(6);
+
+        AND* node1 = new AND(4);
+        node1->addOutputNode(7);
+
+        OR* node2 = new OR(5);
+        node2->addOutputNode(7);
+
+        XOR* node3 = new XOR(6);
+        OR* node4 = new OR(7);
+        node4->addOutputNode(8);
+
+        NOT* node5 = new NOT(8);
 
         logicSystem.addEntryNode(input1);
         logicSystem.addEntryNode(input2);
