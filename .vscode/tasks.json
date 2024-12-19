@@ -10,6 +10,7 @@
                 "main.cpp",
                 "./src/graph.cpp",
                 "./src/logicGates.cpp",
+                "./src/filesHandlers.cpp",
                 "-o",
                 "${fileDirname}\\build\\${fileBasenameNoExtension}.exe"
             ],

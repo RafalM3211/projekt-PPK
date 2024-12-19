@@ -3,10 +3,10 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
-#include <strstream>
 
 #include "./src/headers/graph.h"
 #include "./src/headers/logicGates.h"
+#include "./src/headers/filesHandlers.h"
 
 int main(){
 
@@ -27,6 +27,16 @@ int main(){
     else{
         LogicSystem logicSystem;
 
+        std::vector<int> entryNodesIds = parseInputsLine(graph_structure_file);
+        for(const int & id: entryNodesIds){
+            ENTRY* entryNode = new ENTRY(id);
+            logicSystem.addEntryNode(entryNode);
+        }
+
+        int outputNodeId = parseOutputLine(graph_structure_file);
+        logicSystem.setOutputNodeId(outputNodeId);
+
+        return 0;     
 
         ENTRY* input1 = new ENTRY(1, State::HIGH);
         input1->addOutputNode(4);
