@@ -53,6 +53,7 @@ class XNOR: public Node {
 class NOT: public Node {
     private:
         State computeState(std::vector<State>) override;
+        bool canResolve(std::vector<State>) override;
     public:
         using Node::Node;
 };

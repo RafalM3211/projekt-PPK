@@ -36,6 +36,7 @@ class Node{
         State _state=State::UNSET;
 
         virtual State computeState(std::vector<State>){return State::UNSET;};
+        virtual bool canResolve(std::vector<State>);
         void printNodeError(std::string);
     public:
         const int id;

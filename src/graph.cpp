@@ -62,11 +62,21 @@ void Node::tryResolve(){
         }
     }
 
-    _state = computeState(inputStates);
+    if(canResolve(inputStates)){
+        _state = computeState(inputStates);
+    }
+    else{
+        printNodeError("Can't resolve node. Some inputs are not resolved");
+    }
+    
 }
 
 State Node::getState(){
     return _state;
+}
+
+bool Node::canResolve(std::vector<State> inputStates){
+    return inputStates[0]!=State::UNSET && inputStates[1]!=State::UNSET;
 }
 
 void Node::printInfo(){

@@ -1,6 +1,10 @@
 #include "./headers/logicGates.h"
 
 
+bool NOT::canResolve(std::vector<State> inputStates){
+    return inputStates[0]!=State::UNSET;
+}
+
 
 State AND::computeState(std::vector<State>){
     _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
