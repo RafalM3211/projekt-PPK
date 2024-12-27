@@ -26,7 +26,7 @@ int main(){
     }
     else{
         LogicSystem logicSystem;
-
+        /* 
         std::vector<int> entryNodesIds = parseInputsLine(graph_structure_file);
         for(const int & id: entryNodesIds){
             ENTRY* entryNode = new ENTRY(id);
@@ -35,47 +35,40 @@ int main(){
 
         int outputNodeId = parseOutputLine(graph_structure_file);
         logicSystem.setOutputNodeId(outputNodeId);
-
-        return 0;     
+  */
 
         ENTRY* input1 = new ENTRY(1, State::HIGH);
-        input1->addOutputNode(4);
-        input1->addOutputNode(5);
-        input1->addOutputNode(6);
 
         ENTRY* input2 = new ENTRY(2, State::HIGH);
-        input2->addOutputNode(4);
 
-        ENTRY* input3 = new ENTRY(3, State::LOW);
-        input3->addOutputNode(5);
-        input3->addOutputNode(6);
+        //ENTRY* input3 = new ENTRY(3, State::LOW);
 
         AND* node1 = new AND(4);
-        node1->addOutputNode(7);
+        node1->addInputNode(1);
+        node1->addInputNode(2);
 
-        OR* node2 = new OR(5);
-        node2->addOutputNode(7);
+        //OR* node2 = new OR(5);
 
-        XOR* node3 = new XOR(6);
-        OR* node4 = new OR(7);
-        node4->addOutputNode(8);
+        //XOR* node3 = new XOR(6);
+        //OR* node4 = new OR(7);
+       // node4->addInputNode(8);
 
-        NOT* node5 = new NOT(8);
+        //NOT* node5 = new NOT(8);
 
         logicSystem.addEntryNode(input1);
         logicSystem.addEntryNode(input2);
-        logicSystem.addEntryNode(input3);
+        //logicSystem.addEntryNode(input3);
         logicSystem.addNode(node1);
-        logicSystem.addNode(node2);
+       /*  logicSystem.addNode(node2);
         logicSystem.addNode(node3);
         logicSystem.addNode(node4);
-        logicSystem.addNode(node5);
+        logicSystem.addNode(node5); */
 
-        logicSystem.setOutputNodeId(node5->id);
+        logicSystem.setOutputNodeId(node1->id);
 
         logicSystem.printConnections();
 
-        input1->printInfo();
+       /*  input1->printInfo();
         node1->printInfo();
         node2->printInfo();
         node3->printInfo();
@@ -92,7 +85,7 @@ int main(){
         node4->printInfo();
         node5->printInfo();
         
-        logicSystem.printOutput();
+        logicSystem.printOutput(); */
     }
 
 

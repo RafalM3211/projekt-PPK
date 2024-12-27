@@ -1,53 +1,40 @@
 #include "./headers/logicGates.h"
 
-bool ENTRY::canResolve(){
-    if(_state==State::UNSET){
-        printNodeError("Entry node has unset state. It should have state set durning initialization");
-    }
-    return _state!=State::UNSET;
-}
-
-bool NOT::canResolve(){
-    return _inputs[0]!=State::UNSET;
-}
-
-void NOT::setNodeInput(State state){
-    if(_inputs[0]==State::UNSET){
-        _inputs[0]=state;
-    }
-    else{
-        printNodeError("Input already set. NOT gate shouldn't have more than one input.");
-    }
-}
 
 
-
-void AND::computeState(){
+State AND::computeState(std::vector<State>){
     _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
+    return State::UNSET;
 }
 
-void NAND::computeState(){
+State NAND::computeState(std::vector<State>){
     _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::LOW : State::HIGH;
+    return State::UNSET;
 }
 
-void OR::computeState(){
+State OR::computeState(std::vector<State>){
     _state=_inputs[0]==(State::HIGH || _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
+    return State::UNSET;
 }
 
-void NOR::computeState(){
+State NOR::computeState(std::vector<State>){
     _state=_inputs[0]==(State::HIGH || _inputs[1]==State::HIGH)? State::LOW : State::HIGH;
+    return State::UNSET;
 }
 
-void XOR::computeState(){
+State XOR::computeState(std::vector<State>){
     _state=_inputs[0]!=_inputs[1]? State::HIGH : State::LOW;
+    return State::UNSET;
 }
 
-void XNOR::computeState(){
+State XNOR::computeState(std::vector<State>){
     _state=_inputs[0]!=_inputs[1]? State::LOW : State::HIGH;
+    return State::UNSET;
 }
 
-void NOT::computeState(){
+State NOT::computeState(std::vector<State>){
     _state=_inputs[0]==State::HIGH? State::LOW : State::HIGH;
+    return State::UNSET;
 }
 
 
