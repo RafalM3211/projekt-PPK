@@ -2,15 +2,9 @@
 
 // === Logic system
 
-void LogicSystem::printConnections(){
-    for(auto& pair:_graph){
-        std::cout<< "from " << pair.first << ": ";
-        for(auto & nextId:pair.second->outputNodes){
-            std::cout << nextId << " ";
-        } 
-
-        std::cout << std::endl;
-    }
+void LogicSystem::addEntryNode(Node* node){
+    addNode(node);
+    _startNodes.push_back(node->id);
 }
 
 void LogicSystem::addNode(Node* node){
@@ -18,13 +12,21 @@ void LogicSystem::addNode(Node* node){
     _graph[node->id]=node;   
 }
 
-void LogicSystem::addEntryNode(Node* node){
-    addNode(node);
-    _startNodes.push_back(node->id);
-}
-
 void LogicSystem::setOutputNodeId(int id){
     _outputNodeId=id;
+}
+
+void LogicSystem::printConnections(){
+    std::cout << "connections: " << std::endl;
+
+    for(auto& pair:_graph){
+        std::cout<< "to " << pair.first << ": ";
+        for(auto & inputId:pair.second->inputNodes){
+            std::cout << inputId << " ";
+        } 
+
+        std::cout << std::endl;
+    }
 }
 
 void LogicSystem::printOutput(){
@@ -32,44 +34,55 @@ void LogicSystem::printOutput(){
     std::cout << "System output: " << output;
 }
 
+
 // === Node
 
 void Node::connectToSystemGraph(Graph* graph){
     _graph=graph;
 }
 
-void Node::setNodeInput(State state){
-    if(_inputs[0]==State::UNSET){
-        _inputs[0]=state;
-    }
-    else if(_inputs[1]==State::UNSET){
-        _inputs[1]=state;
-    }
-    else{
-        printNodeError("all two inputs already set");
-    }
+void Node::addInputNode(int id){
+    inputNodes.push_back(id);
 }
 
-void Node::addOutputNode(int id){
-    outputNodes.push_back(id);
-}
+void Node::resolve(){
+    std::vector<State> inputStates{};
 
-void Node::setNextNodesInput(){
-    if(_state!=State::UNSET){
-        for(const int& nextNodeId: outputNodes){
-            Node* nextNode = _graph->at(nextNodeId);
-            nextNode->setNodeInput(_state);
+    for(const int & id: inputNodes){
+        Node* inputNode  =_graph->at(id);
+        State inputNodeState = inputNode->getState();
+
+        if(inputNodeState==State::UNSET){
+            inputNode->resolve();
+            inputNodeState = inputNode->getState();
+            inputStates.push_back(inputNodeState);
+        }
+        else{
+            inputStates.push_back(inputNodeState);
         }
     }
-    else{
-        printNodeError("attemt to set next node input without resolving current node.");
+
+    if(canResolve(inputStates)){
+        _state = computeState(inputStates);
     }
+    else{
+        printNodeError("Can't resolve node. Some inputs are not resolved");
+    }
+    
+}
+
+State Node::getState(){
+    return _state;
+}
+
+bool Node::canResolve(const std::vector<State>& inputStates){
+    return inputStates[0]!=State::UNSET && inputStates[1]!=State::UNSET;
 }
 
 void Node::printInfo(){
-    std::cout<< "id: " << id << "\n inputs states: " << _inputs[0] << " " << _inputs[1] << "\n state: " << _state << "\n output nodes: ";
-    for(const int& nextNodeId: outputNodes){
-            std::cout << nextNodeId << ", ";
+    std::cout << "Node: " << id << " State: " << _state << "\n Input nodes: \n";
+    for(const int& inputNodeId: inputNodes){
+            std::cout << "id: " << inputNodeId << ", state: " << _graph->at(inputNodeId)->getState() << std::endl;
     }
     std::cout << std::endl;
 }
@@ -78,26 +91,3 @@ void Node::printNodeError(std::string text){
     std::cerr << "Error in node with id: " << id << std::endl << text << std::endl;
 }
 
-
-bool Node::canResolve(){
-    return _inputs[0]!=State::UNSET && _inputs[1]!=State::UNSET;
-}
-
-void Node::tryResolveNextNodes(){
-    for(const int& nextNodeId: outputNodes){
-            Node* nextNode = _graph->at(nextNodeId);
-            nextNode->tryResolve();
-        }
-}
-
-void Node::tryResolve(){
-    if(canResolve()){
-        computeState();
-        setNextNodesInput();
-        tryResolveNextNodes();
-    }
-}
-
-State Node::getState(){
-    return _state;
-}
