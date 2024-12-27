@@ -75,7 +75,7 @@ State Node::getState(){
     return _state;
 }
 
-bool Node::canResolve(std::vector<State> inputStates){
+bool Node::canResolve(const std::vector<State>& inputStates){
     return inputStates[0]!=State::UNSET && inputStates[1]!=State::UNSET;
 }
 

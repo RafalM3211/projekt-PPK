@@ -35,8 +35,8 @@ class Node{
         State _inputs[2]={State::UNSET, State::UNSET};
         State _state=State::UNSET;
 
-        virtual State computeState(std::vector<State>){return State::UNSET;};
-        virtual bool canResolve(std::vector<State>);
+        virtual State computeState(const std::vector<State>&){return State::UNSET;};
+        virtual bool canResolve(const std::vector<State>&);
         void printNodeError(std::string);
     public:
         const int id;

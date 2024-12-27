@@ -1,44 +1,51 @@
 #include "./headers/logicGates.h"
 
 
-bool NOT::canResolve(std::vector<State> inputStates){
+bool NOT::canResolve(const std::vector<State>& inputStates){
     return inputStates[0]!=State::UNSET;
 }
 
 
-State AND::computeState(std::vector<State>){
-    _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
-    return State::UNSET;
+State AND::computeState(const std::vector<State>& inputStates){
+    State state=inputStates[0]==(State::HIGH && inputStates[1]==State::HIGH)? State::HIGH : State::LOW;
+
+    return state;
 }
 
-State NAND::computeState(std::vector<State>){
-    _state=_inputs[0]==(State::HIGH && _inputs[1]==State::HIGH)? State::LOW : State::HIGH;
-    return State::UNSET;
+State NAND::computeState(const std::vector<State>& inputStates){
+    State state=inputStates[0]==(State::HIGH && inputStates[1]==State::HIGH)? State::LOW : State::HIGH;
+
+    return state;
 }
 
-State OR::computeState(std::vector<State>){
-    _state=_inputs[0]==(State::HIGH || _inputs[1]==State::HIGH)? State::HIGH : State::LOW;
-    return State::UNSET;
+State OR::computeState(const std::vector<State>& inputStates){
+    State state=inputStates[0]==(State::HIGH || inputStates[1]==State::HIGH)? State::HIGH : State::LOW;
+
+    return state;
 }
 
-State NOR::computeState(std::vector<State>){
-    _state=_inputs[0]==(State::HIGH || _inputs[1]==State::HIGH)? State::LOW : State::HIGH;
-    return State::UNSET;
+State NOR::computeState(const std::vector<State>& inputStates){
+    State state=inputStates[0]==(State::HIGH || inputStates[1]==State::HIGH)? State::LOW : State::HIGH;
+
+    return state;
 }
 
-State XOR::computeState(std::vector<State>){
-    _state=_inputs[0]!=_inputs[1]? State::HIGH : State::LOW;
-    return State::UNSET;
+State XOR::computeState(const std::vector<State>& inputStates){
+    State state=inputStates[0]!=inputStates[1]? State::HIGH : State::LOW;
+
+    return state;
 }
 
-State XNOR::computeState(std::vector<State>){
-    _state=_inputs[0]!=_inputs[1]? State::LOW : State::HIGH;
-    return State::UNSET;
+State XNOR::computeState(const std::vector<State>& inputStates){
+    State state=inputStates[0]!=inputStates[1]? State::LOW : State::HIGH;
+
+    return state;
 }
 
-State NOT::computeState(std::vector<State>){
-    _state=_inputs[0]==State::HIGH? State::LOW : State::HIGH;
-    return State::UNSET;
+State NOT::computeState(const std::vector<State>& inputStates){
+    State state=inputStates[0]==State::HIGH? State::LOW : State::HIGH;
+
+    return state;
 }
 
 

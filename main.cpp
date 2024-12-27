@@ -70,6 +70,12 @@ int main(){
 
         node1->printInfo();
 
+        node1->tryResolve();
+
+        node1->printInfo();
+
+        logicSystem.printOutput();
+
        /*  input1->printInfo();
         node1->printInfo();
         node2->printInfo();
