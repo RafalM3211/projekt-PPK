@@ -68,6 +68,8 @@ int main(){
 
         logicSystem.printConnections();
 
+        node1->printInfo();
+
        /*  input1->printInfo();
         node1->printInfo();
         node2->printInfo();

@@ -69,14 +69,13 @@ State Node::getState(){
     return _state;
 }
 
-
-/* void Node::printInfo(){
-    std::cout<< "id: " << id << "\n inputs states: " << _inputs[0] << " " << _inputs[1] << "\n state: " << _state << "\n output nodes: ";
-    for(const int& nextNodeId: outputNodes){
-            std::cout << nextNodeId << ", ";
+void Node::printInfo(){
+    std::cout << "Node: " << id << " State: " << _state << "\n Input nodes: \n";
+    for(const int& inputNodeId: inputNodes){
+            std::cout << "id: " << inputNodeId << ", state: " << _graph->at(inputNodeId)->getState() << std::endl;
     }
     std::cout << std::endl;
-} */
+}
 
 void Node::printNodeError(std::string text){
     std::cerr << "Error in node with id: " << id << std::endl << text << std::endl;

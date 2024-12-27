@@ -45,7 +45,7 @@ class Node{
         void addInputNode(int);
         void tryResolve();
         State getState();
-        //void printInfo();
+        void printInfo();
 
         Node(int nodeId): id(nodeId){};
         Node(int nodeId, State outState)
