@@ -91,11 +91,27 @@ void Node::tryResolveNextNodes(){
 }
 
 void Node::tryResolve(){
-    if(canResolve()){
+    std::vector<State> inputStates{};
+
+    for(const int & id: inputNodes){
+        Node* inputNode  =_graph->at(id);
+        State inputNodeState = inputNode->getState();
+
+        if(inputNodeState!=State::UNSET){
+            inputStates.push_back(inputNodeState);
+        }
+        else{
+            inputNode->tryResolve();
+            inputNodeState = inputNode->getState();
+            inputStates.push_back(inputNodeState);
+        }
+    }
+
+    /* if(canResolve()){
         computeState();
         setNextNodesInput();
         tryResolveNextNodes();
-    }
+    } */
 }
 
 State Node::getState(){

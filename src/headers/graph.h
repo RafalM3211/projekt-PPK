@@ -42,7 +42,7 @@ class Node{
         virtual bool canResolve();
     public:
         const int id;
-        std::vector<int> outputNodes;
+        std::vector<int> inputNodes;
 
         virtual void setNodeInput(State);
         void addOutputNode(int);
