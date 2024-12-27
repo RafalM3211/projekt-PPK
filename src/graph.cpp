@@ -52,12 +52,12 @@ void Node::tryResolve(){
         Node* inputNode  =_graph->at(id);
         State inputNodeState = inputNode->getState();
 
-        if(inputNodeState!=State::UNSET){
+        if(inputNodeState==State::UNSET){
+            inputNode->tryResolve();
+            inputNodeState = inputNode->getState();
             inputStates.push_back(inputNodeState);
         }
         else{
-            inputNode->tryResolve();
-            inputNodeState = inputNode->getState();
             inputStates.push_back(inputNodeState);
         }
     }
