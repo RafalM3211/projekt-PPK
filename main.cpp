@@ -70,7 +70,7 @@ int main(){
 
         node1->printInfo();
 
-        node1->tryResolve();
+        node1->resolve();
 
         node1->printInfo();
 
@@ -83,9 +83,9 @@ int main(){
         node4->printInfo();
         node5->printInfo();
 
-        input1->tryResolve();
-        input2->tryResolve();
-        input3->tryResolve();
+        input1->resolve();
+        input2->resolve();
+        input3->resolve();
 
         node1->printInfo();
         node2->printInfo();

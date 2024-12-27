@@ -45,7 +45,7 @@ void Node::addInputNode(int id){
     inputNodes.push_back(id);
 }
 
-void Node::tryResolve(){
+void Node::resolve(){
     std::vector<State> inputStates{};
 
     for(const int & id: inputNodes){
@@ -53,7 +53,7 @@ void Node::tryResolve(){
         State inputNodeState = inputNode->getState();
 
         if(inputNodeState==State::UNSET){
-            inputNode->tryResolve();
+            inputNode->resolve();
             inputNodeState = inputNode->getState();
             inputStates.push_back(inputNodeState);
         }

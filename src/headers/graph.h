@@ -44,7 +44,7 @@ class Node{
 
         void connectToSystemGraph(Graph*);
         void addInputNode(int);
-        void tryResolve();
+        void resolve();
         State getState();
         void printInfo();
 
