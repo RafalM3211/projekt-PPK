@@ -2,6 +2,9 @@
 
 
 bool NOT::canResolve(const std::vector<State>& inputStates){
+    if(inputStates.size()>1){
+        printNodeError("Not gate should have only one input but has " + std::to_string(inputStates.size()));
+    }
     return inputStates[0]!=State::UNSET;
 }
 

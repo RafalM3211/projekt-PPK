@@ -8,14 +8,29 @@ void LogicSystem::addEntryNode(std::shared_ptr<Node> node){
     _startNodes.push_back(node->id);
 }
 
-void LogicSystem::createNode(std::string gate, std::vector<int> inputsNodesIds, int id){
+void LogicSystem::createNode(std::string gate, std::vector<int> inputNodesIds, int id){
     Node* node;
 
     if(gate=="AND"){
-        node = new AND(id, inputsNodesIds);
+        node = new AND(id, inputNodesIds);
     }
     else if(gate=="NAND"){
-        node = new NAND(id, inputsNodesIds);
+        node = new NAND(id, inputNodesIds);
+    }
+    else if(gate=="OR"){
+        node = new OR(id, inputNodesIds);
+    }
+    else if(gate=="NOR"){
+        node = new NOR(id, inputNodesIds);
+    }
+    else if(gate=="XOR"){
+        node = new NAND(id, inputNodesIds);
+    }
+    else if(gate=="XNOR"){
+        node = new NAND(id, inputNodesIds);
+    }
+    else if(gate=="NOT"){
+        node = new NOT(id, inputNodesIds);
     }
 
     std::shared_ptr<Node> ptr_node(node);
