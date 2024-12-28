@@ -1,13 +1,29 @@
 #include "./headers/graph.h"
+#include "./headers/logicGates.h"
 
 // === Logic system
 
-void LogicSystem::addEntryNode(Node* node){
+void LogicSystem::addEntryNode(std::shared_ptr<Node> node){
     addNode(node);
     _startNodes.push_back(node->id);
 }
 
-void LogicSystem::addNode(Node* node){
+void LogicSystem::createNode(std::string gate, std::vector<int> inputsNodesIds, int id){
+    Node* node;
+
+    if(gate=="AND"){
+        node = new AND(id, inputsNodesIds);
+    }
+    else if(gate=="NAND"){
+        node = new NAND(id, inputsNodesIds);
+    }
+
+    std::shared_ptr<Node> ptr_node(node);
+
+    addNode(ptr_node);
+}
+
+void LogicSystem::addNode(std::shared_ptr<Node> node){
     node->connectToSystemGraph(&_graph);
     _graph[node->id]=node;   
 }
@@ -49,7 +65,7 @@ void Node::resolve(){
     std::vector<State> inputStates{};
 
     for(const int & id: inputNodes){
-        Node* inputNode  =_graph->at(id);
+        std::shared_ptr<Node> inputNode  =_graph->at(id);
         State inputNodeState = inputNode->getState();
 
         if(inputNodeState==State::UNSET){

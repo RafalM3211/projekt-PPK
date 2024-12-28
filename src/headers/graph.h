@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-
+#include <memory>
 
 enum State {
     LOW,
@@ -14,16 +14,17 @@ enum State {
 
 class Node;
 
-using Graph = std::unordered_map<int, Node*>;
+using Graph = std::unordered_map<int, std::shared_ptr<Node>>;
 
 class LogicSystem{
     private:
         Graph _graph;
         std::vector<int> _startNodes;
         int _outputNodeId;
+        void addNode(std::shared_ptr<Node>);
     public:
-        void addEntryNode(Node*); 
-        void addNode(Node*);
+        void addEntryNode(std::shared_ptr<Node>); 
+        void createNode(std::string, std::vector<int>, int);
         void setOutputNodeId(int);
         void printConnections();
         void printOutput();
@@ -32,7 +33,6 @@ class LogicSystem{
 class Node{
     protected:
         Graph* _graph=nullptr;
-        State _inputs[2]={State::UNSET, State::UNSET};
         State _state=State::UNSET;
 
         virtual State computeState(const std::vector<State>&){return State::UNSET;};
@@ -48,9 +48,9 @@ class Node{
         State getState();
         void printInfo();
 
-        Node(int nodeId): id(nodeId){};
-        Node(int nodeId, State outState)
-        : id(nodeId), _state(outState){};
+        Node(int nodeId, std::vector<int> inputNodesIds): id(nodeId), inputNodes(inputNodesIds){};
+        Node(int nodeId)
+        : id(nodeId){};
 };
 
 #endif

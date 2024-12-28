@@ -7,6 +7,8 @@
 #include <string>
 #include <sstream>
 
+std::stringstream getLineToStringStream(std::ifstream &);
+
 std::vector<int> parseInputsLine(std::ifstream &);
 
 int parseOutputLine(std::ifstream &);
