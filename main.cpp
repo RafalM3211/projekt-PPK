@@ -29,8 +29,7 @@ int main(){
         
         std::vector<int> entryNodesIds = parseInputsLine(graph_structure_file);
         for(const int & id: entryNodesIds){
-            std::shared_ptr<Node> entryNode(new ENTRY(id));
-            logicSystem.addEntryNode(entryNode);
+            logicSystem.createEntryNode(id);
         }
 
         int outputNodeId = parseOutputLine(graph_structure_file);

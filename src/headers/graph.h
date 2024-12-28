@@ -23,7 +23,7 @@ class LogicSystem{
         int _outputNodeId;
         void addNode(std::shared_ptr<Node>);
     public:
-        void addEntryNode(std::shared_ptr<Node>); 
+        void createEntryNode(int);
         void createNode(std::string, std::vector<int>, int);
         void setOutputNodeId(int);
         void printConnections();

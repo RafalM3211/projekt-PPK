@@ -3,9 +3,10 @@
 
 // === Logic system
 
-void LogicSystem::addEntryNode(std::shared_ptr<Node> node){
-    addNode(node);
-    _startNodes.push_back(node->id);
+void LogicSystem::createEntryNode(int id){
+    std::shared_ptr<Node> entryNode(new ENTRY(id));
+    addNode(entryNode);
+    _startNodes.push_back(entryNode->id);
 }
 
 void LogicSystem::createNode(std::string gate, std::vector<int> inputNodesIds, int id){
