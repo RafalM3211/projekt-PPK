@@ -61,8 +61,10 @@ int main(){
         logicSystem.setEntryNodeState(1, State::LOW);
         logicSystem.setEntryNodeState(6, State::LOW);
 
+        logicSystem.resolve();
+        logicSystem.printOutput();
 
-        
+        logicSystem.printNodesInfo();
 
         return 0;
 

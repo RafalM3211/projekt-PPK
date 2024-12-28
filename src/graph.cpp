@@ -25,10 +25,10 @@ void LogicSystem::createNode(std::string gate, std::vector<int> inputNodesIds, i
         node = new NOR(id, inputNodesIds);
     }
     else if(gate=="XOR"){
-        node = new NAND(id, inputNodesIds);
+        node = new XOR(id, inputNodesIds);
     }
     else if(gate=="XNOR"){
-        node = new NAND(id, inputNodesIds);
+        node = new XNOR(id, inputNodesIds);
     }
     else if(gate=="NOT"){
         node = new NOT(id, inputNodesIds);
@@ -49,15 +49,21 @@ void LogicSystem::setEntryNodeState(int id, State state){
     node->setState(state);
 }
 
-
 void LogicSystem::setOutputNodeId(int id){
     _outputNodeId=id;
 }
 
+void LogicSystem::resolve(){
+    std::shared_ptr<Node> outputNode=_graph.at(_outputNodeId);
+    outputNode->resolve();
+}
+
+
+
 void LogicSystem::printConnections(){
     std::cout << "connections: " << std::endl;
 
-    for(auto& pair:_graph){
+    for(const auto& pair: _graph){
         std::cout<< "to " << pair.first << ": ";
         for(auto & inputId:pair.second->inputNodes){
             std::cout << inputId << " ";
@@ -67,9 +73,34 @@ void LogicSystem::printConnections(){
     }
 }
 
+void LogicSystem::printNodesInfo(std::vector<int> nodesIds){
+    std::cout << "Nodes Info: " << std::endl;
+
+    for(const auto& id: nodesIds){
+        std::shared_ptr<Node> node = _graph.at(id);
+
+        std::cout << "Node id:  " << id << std::endl;
+        std::cout << "  state: " << node->getState() << std::endl;
+        std::cout << "  input nodes: ";
+        for(auto & inputId:node->inputNodes){
+            std::cout << inputId << " ";
+        } 
+
+        std::cout << std::endl;
+    }
+}
+
+void LogicSystem::printNodesInfo(){
+    std::vector<int> allIds;
+    for(const auto& pair: _graph){
+        allIds.push_back(pair.first);
+    }
+    printNodesInfo(allIds);
+}
+
 void LogicSystem::printOutput(){
     State output=_graph.at(_outputNodeId)->getState();
-    std::cout << "System output: " << output;
+    std::cout << "System output: " << output << std::endl;
 }
 
 

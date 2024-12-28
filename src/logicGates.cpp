@@ -14,25 +14,25 @@ bool NOT::canResolve(const std::vector<State>& inputStates){
 
 
 State AND::computeState(const std::vector<State>& inputStates){
-    State state=inputStates[0]==(State::HIGH && inputStates[1]==State::HIGH)? State::HIGH : State::LOW;
+    State state=(inputStates[0]==State::HIGH && inputStates[1]==State::HIGH)? State::HIGH : State::LOW;
 
     return state;
 }
 
 State NAND::computeState(const std::vector<State>& inputStates){
-    State state=inputStates[0]==(State::HIGH && inputStates[1]==State::HIGH)? State::LOW : State::HIGH;
+    State state=(inputStates[0]==State::HIGH && inputStates[1]==State::HIGH)? State::LOW : State::HIGH;
 
     return state;
 }
 
 State OR::computeState(const std::vector<State>& inputStates){
-    State state=inputStates[0]==(State::HIGH || inputStates[1]==State::HIGH)? State::HIGH : State::LOW;
+    State state=(inputStates[0]==State::HIGH || inputStates[1]==State::HIGH)? State::HIGH : State::LOW;
 
     return state;
 }
 
 State NOR::computeState(const std::vector<State>& inputStates){
-    State state=inputStates[0]==(State::HIGH || inputStates[1]==State::HIGH)? State::LOW : State::HIGH;
+    State state=(inputStates[0]==State::HIGH || inputStates[1]==State::HIGH)? State::LOW : State::HIGH;
 
     return state;
 }
