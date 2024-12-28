@@ -44,6 +44,12 @@ void LogicSystem::addNode(std::shared_ptr<Node> node){
     _graph[node->id]=node;   
 }
 
+void LogicSystem::setEntryNodeState(int id, State state){
+    std::shared_ptr<Node> node = _graph.at(id);
+    node->setState(state);
+}
+
+
 void LogicSystem::setOutputNodeId(int id){
     _outputNodeId=id;
 }
@@ -107,9 +113,14 @@ State Node::getState(){
     return _state;
 }
 
+void Node::setState(State state){
+    printNodeError("State should be set manually only in entry nodes. Ignore this if you ran this function for debugging purposes.");
+}
+
 bool Node::canResolve(const std::vector<State>& inputStates){
     return inputStates[0]!=State::UNSET && inputStates[1]!=State::UNSET;
 }
+
 
 void Node::printInfo(){
     std::cout << "Node: " << id << " State: " << _state << "\n Input nodes: \n";

@@ -58,6 +58,12 @@ int main(){
 
         logicSystem.printConnections();
 
+        logicSystem.setEntryNodeState(1, State::LOW);
+        logicSystem.setEntryNodeState(6, State::LOW);
+
+
+        
+
         return 0;
 
 

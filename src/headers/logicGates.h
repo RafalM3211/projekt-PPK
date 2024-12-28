@@ -6,6 +6,7 @@
 class ENTRY: public Node{
     public:
         using Node::Node;
+        void setState(State);
 };
 
 class AND: public Node {
