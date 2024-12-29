@@ -52,3 +52,20 @@ int parseOutputLine(std::ifstream & graph_structure_file){
 
     return outputNodeId;
 }
+
+std::pair<int, State> getInputIdAndStateFromString(std::string inputStateString){
+    std::string inputIdString;
+
+    int i=0;
+    while(inputStateString[i]!=':'){
+        inputIdString+=inputStateString[i];
+        i++;
+    }
+
+    int inputId=std::stoi(inputIdString);
+
+    int stateNum=inputStateString[i+1] - '0';
+    State state=stateNum==0? State::LOW : State::HIGH;
+
+    return {inputId, state};
+}

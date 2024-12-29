@@ -35,9 +35,9 @@ int main(){
         int outputNodeId = parseOutputLine(graph_structure_file);
         logicSystem.setOutputNodeId(outputNodeId);
 
-
         std::stringstream line=getLineToStringStream(graph_structure_file);
         while(!line.str().empty()) {
+            //createNodeFromFileLine moze?
             std::string gateName;
             line >> gateName;
 
@@ -55,11 +55,24 @@ int main(){
             line=getLineToStringStream(graph_structure_file);
         };
 
-        logicSystem.setEntryNodeState(1, State::LOW);
-        logicSystem.setEntryNodeState(6, State::LOW);
 
-        logicSystem.resolve();
-        
+        line=getLineToStringStream(inputs_states_file);
+        while(!line.str().empty()){
+            std::string inputStateString;
+
+            while(line>>inputStateString){
+                std::pair<int, State> input = getInputIdAndStateFromString(inputStateString);
+
+                std::cout << "entry ndoe id: " << input.first << " state: " << input.second << std::endl;
+
+                logicSystem.setEntryNodeState(input.first, input.second);
+            }
+
+            logicSystem.resolve();
+            logicSystem.printOutput();
+
+            line=getLineToStringStream(inputs_states_file);
+        }
     }
 
     return 0;
