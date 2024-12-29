@@ -69,3 +69,7 @@ std::pair<int, State> getInputIdAndStateFromString(std::string inputStateString)
 
     return {inputId, state};
 }
+
+void writeToOutputFile(std::ofstream& file, std::string text){
+    file << text << std::endl;
+} 

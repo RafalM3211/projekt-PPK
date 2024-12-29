@@ -7,22 +7,25 @@
 #include "./src/headers/graph.h"
 #include "./src/headers/logicGates.h"
 #include "./src/headers/filesHandlers.h"
+#include "./src/headers/cli.h"
 
-int main(){
+int main(int argc, char* argv[]){
+    CliArgs* arguments = parseCliArguments(argc, argv);
 
+    std::cout << arguments->graphFilePath << " " << arguments->inputStatesFilePath << " " << arguments->outputFilePath << std::endl;
 
-    std::ifstream graph_structure_file("./data/graph_structure.txt");
-    std::ifstream inputs_states_file("./data/inputs_states.txt");
-    std::ofstream output_file("./data/outputs.txt");
+    std::ifstream graph_structure_file(arguments->graphFilePath);
+    std::ifstream inputs_states_file(arguments->inputStatesFilePath);
+    std::ofstream output_file(arguments->outputFilePath);
 
     if(!graph_structure_file){
-        std::cerr << "couldn't open graph structure file" << std::endl;
+        std::cerr << "couldn't open graph structure file with given path: " << arguments->graphFilePath << std::endl;
     }
     else if(!inputs_states_file){
-        std::cerr << "couldn't open inputs states file" << std::endl;
+        std::cerr << "couldn't open inputs states file with given path: " << arguments->inputStatesFilePath << std::endl;
     }
     else if(!output_file){
-        std::cerr << "couldn't open output file" << std::endl;
+        std::cerr << "couldn't open output file with given path: " << arguments->outputFilePath << std::endl;
     }
     else{
         LogicSystem logicSystem;
@@ -37,7 +40,6 @@ int main(){
 
         std::stringstream line=getLineToStringStream(graph_structure_file);
         while(!line.str().empty()) {
-            //createNodeFromFileLine moze?
             std::string gateName;
             line >> gateName;
 
@@ -63,13 +65,12 @@ int main(){
             while(line>>inputStateString){
                 std::pair<int, State> input = getInputIdAndStateFromString(inputStateString);
 
-                std::cout << "id: " << input.first << " state: " << input.second << std::endl;
-
                 logicSystem.setEntryNodeState(input.first, input.second);
             }
 
             logicSystem.resolve();
-            logicSystem.printOutput();
+            std::string outputString = logicSystem.createOutputString();
+            writeToOutputFile(output_file, outputString);
             logicSystem.reset();
 
             line=getLineToStringStream(inputs_states_file);

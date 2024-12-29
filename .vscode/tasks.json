@@ -11,6 +11,7 @@
                 "./src/graph.cpp",
                 "./src/logicGates.cpp",
                 "./src/filesHandlers.cpp",
+                "./src/cli.cpp",
                 "-o",
                 "${fileDirname}\\build\\${fileBasenameNoExtension}.exe"
             ],
