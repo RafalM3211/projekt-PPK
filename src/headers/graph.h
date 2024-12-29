@@ -5,6 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include <memory>
+#include <sstream>
 
 enum State {
     LOW,
@@ -19,7 +20,7 @@ using Graph = std::unordered_map<int, std::shared_ptr<Node>>;
 class LogicSystem{
     private:
         Graph _graph;
-        std::vector<int> _startNodes;
+        std::vector<int> _startNodes;       //todo: change name to _entryNodes
         int _outputNodeId;
         void addNode(std::shared_ptr<Node>);
     public:
@@ -29,6 +30,7 @@ class LogicSystem{
         void setEntryNodeState(int, State);
         void resolve();
         void reset();
+        std::string createOutputString();
 
         void printConnections();
         void printNodesInfo(std::vector<int>);

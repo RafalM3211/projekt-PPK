@@ -37,7 +37,6 @@ int main(){
 
         std::stringstream line=getLineToStringStream(graph_structure_file);
         while(!line.str().empty()) {
-            //createNodeFromFileLine moze?
             std::string gateName;
             line >> gateName;
 
@@ -63,13 +62,12 @@ int main(){
             while(line>>inputStateString){
                 std::pair<int, State> input = getInputIdAndStateFromString(inputStateString);
 
-                std::cout << "id: " << input.first << " state: " << input.second << std::endl;
-
                 logicSystem.setEntryNodeState(input.first, input.second);
             }
 
             logicSystem.resolve();
-            logicSystem.printOutput();
+            std::string outputString = logicSystem.createOutputString();
+            writeToOutputFile(output_file, outputString);
             logicSystem.reset();
 
             line=getLineToStringStream(inputs_states_file);

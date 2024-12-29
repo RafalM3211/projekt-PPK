@@ -65,6 +65,21 @@ void LogicSystem::reset(){
     }
 }
 
+std::string LogicSystem::createOutputString(){
+    std::stringstream outputString;
+    outputString << "IN: ";
+
+    for(const auto& entryNodeId: _startNodes){
+        State entryNodeState =  _graph.at(entryNodeId)->getState();
+        outputString << entryNodeId << ":" << entryNodeState << " ";
+    }
+
+    State outputState=_graph.at(_outputNodeId)->getState();
+    outputString << "OUT: " << _outputNodeId << ":" << outputState;
+
+    return outputString.str();
+}
+
 
 void LogicSystem::printConnections(){
     std::cout << "connections: " << std::endl;

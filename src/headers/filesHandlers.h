@@ -17,4 +17,6 @@ int parseOutputLine(std::ifstream &);
 
 std::pair<int, State> getInputIdAndStateFromString(std::string);
 
+void writeToOutputFile(std::ofstream &, std::string);
+
 #endif
