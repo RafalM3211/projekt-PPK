@@ -50,48 +50,16 @@ int main(){
             int thisNodeId = inputNodesIds.back();
             inputNodesIds.pop_back();
             
-            std::cout << line.str() << std::endl;
             logicSystem.createNode(gateName, inputNodesIds, thisNodeId);
             
             line=getLineToStringStream(graph_structure_file);
         };
 
-        logicSystem.printConnections();
-
         logicSystem.setEntryNodeState(1, State::LOW);
         logicSystem.setEntryNodeState(6, State::LOW);
 
         logicSystem.resolve();
-        logicSystem.printOutput();
-
-        logicSystem.printNodesInfo();
-
-        return 0;
-
-
-
-
-
-        //ENTRY* input1 = new ENTRY(1, State::HIGH);
-
-        //ENTRY* input2 = new ENTRY(2, State::HIGH);
-
-        //ENTRY* input3 = new ENTRY(3, State::LOW);
-
-        AND* node1 = new AND(4, {1,2});
-
-
-        logicSystem.setOutputNodeId(node1->id);
-
-        logicSystem.printConnections();
-
-        node1->printInfo();
-
-        node1->resolve();
-
-        node1->printInfo();
-
-        logicSystem.printOutput();
+        
     }
 
     return 0;
