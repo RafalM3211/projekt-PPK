@@ -63,13 +63,14 @@ int main(){
             while(line>>inputStateString){
                 std::pair<int, State> input = getInputIdAndStateFromString(inputStateString);
 
-                std::cout << "entry ndoe id: " << input.first << " state: " << input.second << std::endl;
+                std::cout << "id: " << input.first << " state: " << input.second << std::endl;
 
                 logicSystem.setEntryNodeState(input.first, input.second);
             }
 
             logicSystem.resolve();
             logicSystem.printOutput();
+            logicSystem.reset();
 
             line=getLineToStringStream(inputs_states_file);
         }

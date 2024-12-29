@@ -28,6 +28,7 @@ class LogicSystem{
         void setOutputNodeId(int);
         void setEntryNodeState(int, State);
         void resolve();
+        void reset();
 
         void printConnections();
         void printNodesInfo(std::vector<int>);
@@ -51,7 +52,7 @@ class Node{
         void addInputNode(int);
         void resolve();
         State getState();
-        virtual void setState(State);
+        void setState(State);
         void printInfo();
 
         Node(int nodeId, std::vector<int> inputNodesIds): id(nodeId), inputNodes(inputNodesIds){};

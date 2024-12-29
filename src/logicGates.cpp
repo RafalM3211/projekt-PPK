@@ -1,10 +1,5 @@
 #include "./headers/logicGates.h"
 
-
-void ENTRY::setState(State state){
-    _state=state;
-}
-
 bool NOT::canResolve(const std::vector<State>& inputStates){
     if(inputStates.size()>1){
         printNodeError("Not gate should have only one input but has " + std::to_string(inputStates.size()));

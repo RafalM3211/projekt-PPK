@@ -58,14 +58,20 @@ void LogicSystem::resolve(){
     outputNode->resolve();
 }
 
+void LogicSystem::reset(){
+    for(const auto& idNodePair: _graph){
+        std::shared_ptr<Node> node = idNodePair.second;
+        node->setState(State::UNSET);
+    }
+}
 
 
 void LogicSystem::printConnections(){
     std::cout << "connections: " << std::endl;
 
-    for(const auto& pair: _graph){
-        std::cout<< "to " << pair.first << ": ";
-        for(auto & inputId:pair.second->inputNodes){
+    for(const auto& idNodePair: _graph){
+        std::cout<< "to " << idNodePair.first << ": ";
+        for(auto & inputId:idNodePair.second->inputNodes){
             std::cout << inputId << " ";
         } 
 
@@ -145,7 +151,7 @@ State Node::getState(){
 }
 
 void Node::setState(State state){
-    printNodeError("State should be set manually only in entry nodes. Ignore this if you ran this function for debugging purposes.");
+    _state=state;
 }
 
 bool Node::canResolve(const std::vector<State>& inputStates){
