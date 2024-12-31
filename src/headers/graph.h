@@ -20,7 +20,7 @@ using Graph = std::unordered_map<int, std::shared_ptr<Node>>;
 class LogicSystem{
     private:
         Graph _graph;
-        std::vector<int> _startNodes;       //todo: change name to _entryNodes
+        std::vector<int> _entryNodes;       //todo: change name to _entryNodes
         int _outputNodeId;
         void addNode(std::shared_ptr<Node>);
     public:

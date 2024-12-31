@@ -6,7 +6,7 @@
 void LogicSystem::createEntryNode(int id){
     std::shared_ptr<Node> entryNode(new ENTRY(id));
     addNode(entryNode);
-    _startNodes.push_back(entryNode->id);
+    _entryNodes.push_back(entryNode->id);
 }
 
 void LogicSystem::createNode(std::string gate, std::vector<int> inputNodesIds, int id){
@@ -69,7 +69,7 @@ std::string LogicSystem::createOutputString(){
     std::stringstream outputString;
     outputString << "IN: ";
 
-    for(const auto& entryNodeId: _startNodes){
+    for(const auto& entryNodeId: _entryNodes){
         State entryNodeState =  _graph.at(entryNodeId)->getState();
         outputString << entryNodeId << ":" << entryNodeState << " ";
     }
