@@ -34,5 +34,16 @@ CliArgs* parseCliArguments(int argc, char* argv[]){
 }
 
 void printHelpMessage(){
-    std::cerr << "help message" << std::endl;
+    std::string helpMessage = 
+    "Usage: main.exe [OPTIONS] \n\n"
+    
+    "Options:\n"
+    "-u <file>       Specify the input file containing the logic system.\n"
+    "-i <file>       Specify the input file containing the input states.\n"
+    "-o <file>       Specify the output file for the output states.\n"
+    "--help          Display this help message and exit.\n\n"
+
+    "Example: \n"
+    "\t program_name -u system.txt -i inputs.txt -o outputs.txt";
+    std::cerr << helpMessage << std::endl;
 }
