@@ -4,7 +4,6 @@ CliArgs* parseCliArguments(int argc, char* argv[]){
     CliArgs* arguments = new CliArgs();
 
     for(int i=1; i<argc; i++){
-        std::cout << argv[i] << " " << argv[i+1] << std::endl;
         std::string argument = argv[i];
 
         if(argument=="-u"){
@@ -16,10 +15,19 @@ CliArgs* parseCliArguments(int argc, char* argv[]){
         else if(argument=="-o"){
             arguments->outputFilePath=argv[++i];
         }
-        else{
+        else if(argument=="--help"){
             printHelpMessage();
-            break;
+            throw std::string();
         }
+        else{
+            throw std::string("Unknown argument '" + argument + "'");
+        }
+    }
+
+    bool allNecessaryFlagsSet = !arguments->graphFilePath.empty() && !arguments->inputStatesFilePath.empty() && !arguments->outputFilePath.empty();
+    if(!allNecessaryFlagsSet){
+        printHelpMessage();
+        throw std::string();
     }
 
     return arguments;
