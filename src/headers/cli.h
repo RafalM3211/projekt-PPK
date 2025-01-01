@@ -1,6 +1,11 @@
 #include <iostream>
 #include <string>
 
+
+/**
+ * @brief krotki opis
+  */
+
 class CliArgs{
     public:
         std::string graphFilePath;
