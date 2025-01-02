@@ -78,21 +78,52 @@ class Node{
         Graph* _graph=nullptr;
         State _state=State::UNSET;
 
+        /// @brief Oblicza stan węzła
+        /// @param inputStates Wektor stanów wejściowych
+        /// @return Stan węzła
         virtual State computeState(const std::vector<State>&){return State::UNSET;};
+
+        /// @brief Sprawdza czy można obliczyć stan węzła
+        /// @param  inputStates wektor stanów wejściowych
+        /// @return Prawda lub fałsz w zależności czy wejścia mają stan ustalony
         virtual bool canResolve(const std::vector<State>&);
+
+        /// @brief Wypisuje błąd węzła
+        /// @param  text Tekst błędu
         void printNodeError(std::string);
     public:
         const int id;
         std::vector<int> inputNodes;
 
+        /// @brief Łączy węzeł z układem logicznym. Ustawia graf węzła na graf układu
+        /// @param graph Graf układu logicznego (jego wartość _graph)
         void connectToSystemGraph(Graph*);
+
+        /// @brief Dodaje węzeł wejściowy do aktualnego węzła
+        /// @param  id Id węzła wejściowego
         void addInputNode(int);
+        
+        /// @brief Rozwiązuje węzeł. Jeśli węzły wejściowe mają stan ustalony ustawia stan węzła. W przeciwnym wypadku przed ustawieniem stanu rozwiązuje węzły wejściowe
         void resolve();
+
+        /// @brief Pobiera stan węzła
+        /// @return Stan węzła
         State getState();
+
+        /// @brief Ustawia stan węzłą
+        /// @param  state Stan 
         void setState(State);
+
+        /// @brief Wypisuje informacje o węźle. Jego id, stan, węzły wejściowe oraz ich stany
         void printInfo();
 
+        /// @brief Tworzy obiekt węzła. Służy do tworzenia obiektów bramek logicznych
+        /// @param nodeId Id węzła
+        /// @param inputNodesIds Id węzłów wejściowych
         Node(int nodeId, std::vector<int> inputNodesIds): id(nodeId), inputNodes(inputNodesIds){};
+
+        /// @brief Tworzy obiekt węzła. Służy do tworzenia obiektu węzła wejściowego układu
+        /// @param nodeId Id węzła
         Node(int nodeId)
         : id(nodeId){};
 };
