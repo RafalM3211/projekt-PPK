@@ -1,9 +1,5 @@
 #include "./headers/cli.h"
 
-/// @brief test
-/// @param argc aasdas
-/// @param argv asdg
-/// @return zwracanie
 CliArgs* parseCliArguments(int argc, char* argv[]){
     CliArgs* arguments = new CliArgs();
 
