@@ -100,14 +100,7 @@ void LogicSystem::printNodesInfo(std::vector<int> nodesIds){
     for(const auto& id: nodesIds){
         std::shared_ptr<Node> node = _graph.at(id);
 
-        std::cout << "Node id:  " << id << std::endl;
-        std::cout << "  state: " << node->getState() << std::endl;
-        std::cout << "  input nodes: ";
-        for(auto & inputId:node->inputNodes){
-            std::cout << inputId << " ";
-        } 
-
-        std::cout << std::endl;
+        node->printInfo();
     }
 }
 
