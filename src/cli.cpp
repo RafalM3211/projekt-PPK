@@ -45,5 +45,5 @@ void printHelpMessage(){
 
     "Example: \n"
     "\t tuc.exe -u system.txt -i inputs.txt -o outputs.txt";
-    std::cerr << helpMessage << std::endl;
+    std::cout << helpMessage << std::endl;
 }
