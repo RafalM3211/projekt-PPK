@@ -35,7 +35,7 @@ CliArgs* parseCliArguments(int argc, char* argv[]){
 
 void printHelpMessage(){
     std::string helpMessage = 
-    "Usage: main.exe [OPTIONS] \n\n"
+    "Usage: tuc.exe [OPTIONS] \n\n"
     
     "Options:\n"
     "-u <file>       Specify the input file containing the logic system.\n"
@@ -44,6 +44,6 @@ void printHelpMessage(){
     "--help          Display this help message and exit.\n\n"
 
     "Example: \n"
-    "\t program_name -u system.txt -i inputs.txt -o outputs.txt";
+    "\t tuc.exe -u system.txt -i inputs.txt -o outputs.txt";
     std::cerr << helpMessage << std::endl;
 }

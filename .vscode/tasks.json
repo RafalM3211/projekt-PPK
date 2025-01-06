@@ -13,7 +13,7 @@
                 "./src/filesHandlers.cpp",
                 "./src/cli.cpp",
                 "-o",
-                "${fileDirname}\\build\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\build\\tuc.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
